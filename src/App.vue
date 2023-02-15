@@ -1,8 +1,8 @@
 <script setup>
-import AppButton from './components/AppButton.vue'
+import AppAlertBox from './components/AppAlertBox.vue'
 </script>
 
 <template>
   <h1>Mind Lens Coding Test</h1>
-  <AppButton></AppButton>
+  <AppAlertBox alert-type="info"></AppAlertBox>
 </template>

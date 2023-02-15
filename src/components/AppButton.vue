@@ -1,39 +1,47 @@
 <template>
-  <div>
-    <button
-      :buttonType="buttonType"
-      :class="[
-        buttonType === 'primary' ? 'primary' : 'secondary',
-        { 'icon-only': iconOnly },
-      ]"
-    >
-      <!-- prepend icon -->
-      <font-awesome-icon
-        v-if="prependIcon"
-        :class="{ prepend: prependIcon }"
-        icon="fa-solid fa-arrow-right"
-        size="lg"
-      />
+  <button
+    :buttonType="buttonType"
+    class="btn"
+    :class="[
+      buttonType === 'primary' ? 'primary' : 'secondary',
+      { 'icon-only': iconOnly },
+    ]"
+    :style="[
+      buttonType === 'primary'
+        ? { backgroundColor: color }
+        : { borderColor: color, color: color },
+    ]"
+  >
+    <!-- prepend icon -->
+    <font-awesome-icon
+      v-if="prependIcon"
+      :class="{ prepend: prependIcon }"
+      icon="fa-solid fa-arrow-right"
+      size="lg"
+    />
 
-      <!-- icon only or text only btn -->
-      <span v-if="iconOnly">
-        <font-awesome-icon icon="fa-solid fa-arrow-right" size="lg" />
-      </span>
-      <span v-else>Active</span>
+    <!-- icon only or text only btn -->
+    <span v-if="iconOnly">
+      <font-awesome-icon icon="fa-solid fa-arrow-right" size="lg" />
+    </span>
+    <span v-else>Action</span>
 
-      <!-- append icon -->
-      <font-awesome-icon
-        v-if="appendIcon"
-        :class="{ append: appendIcon }"
-        icon="fa-solid fa-arrow-right"
-        size="lg"
-      />
-    </button>
-  </div>
+    <!-- append icon -->
+    <font-awesome-icon
+      v-if="appendIcon"
+      :class="{ append: appendIcon }"
+      icon="fa-solid fa-arrow-right"
+      size="lg"
+    />
+  </button>
 </template>
 
 <script setup>
 defineProps({
+  color: {
+    type: String,
+    default: '#f7ba50',
+  },
   buttonType: {
     type: String,
     default: 'primary',
@@ -61,26 +69,15 @@ button {
   height: 40px;
   cursor: pointer;
 }
-button.primary {
-  background-color: #f7ba50;
+button:focus {
+  outline: none;
 }
 button.secondary {
-  border-color: #c75100;
-  color: #c75100;
   background-color: none;
 }
-button.primary:hover {
+button:hover {
   filter: drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.14))
     drop-shadow(0px 1px 18px rgba(0, 0, 0, 0.12));
-  background-color: #f5ab2b;
-  border: none;
-}
-button.secondary:hover {
-  filter: drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.14))
-    drop-shadow(0px 1px 18px rgba(0, 0, 0, 0.12));
-  border-color: #c75100;
-  color: #c75100;
-  background-color: none;
 }
 .prepend {
   margin-right: 4px;

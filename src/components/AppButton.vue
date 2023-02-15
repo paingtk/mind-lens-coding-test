@@ -2,9 +2,32 @@
   <div>
     <button
       :buttonType="buttonType"
-      :class="[buttonType === 'primary' ? 'primary' : 'secondary']"
+      :class="[
+        buttonType === 'primary' ? 'primary' : 'secondary',
+        { 'icon-only': iconOnly },
+      ]"
     >
-      Action
+      <!-- prepend icon -->
+      <font-awesome-icon
+        v-if="prependIcon"
+        :class="{ prepend: prependIcon }"
+        icon="fa-solid fa-arrow-right"
+        size="lg"
+      />
+
+      <!-- icon only or text only btn -->
+      <span v-if="iconOnly">
+        <font-awesome-icon icon="fa-solid fa-arrow-right" size="lg" />
+      </span>
+      <span v-else>Active</span>
+
+      <!-- append icon -->
+      <font-awesome-icon
+        v-if="appendIcon"
+        :class="{ append: appendIcon }"
+        icon="fa-solid fa-arrow-right"
+        size="lg"
+      />
     </button>
   </div>
 </template>
@@ -13,7 +36,19 @@
 defineProps({
   buttonType: {
     type: String,
-    default: 'secondary',
+    default: 'primary',
+  },
+  prependIcon: {
+    type: Boolean,
+    default: false,
+  },
+  appendIcon: {
+    type: Boolean,
+    default: false,
+  },
+  iconOnly: {
+    type: Boolean,
+    default: false,
   },
 })
 </script>
@@ -22,9 +57,6 @@ defineProps({
 button {
   border-radius: 8px;
   padding: 6px 12px;
-  font-size: 16px;
-  font-weight: 600;
-  font-family: inherit;
   width: 130px;
   height: 40px;
   cursor: pointer;
@@ -45,8 +77,14 @@ button:hover {
 button.primary:hover {
   background-color: #f5ab2b;
 }
-/* button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-} */
+.prepend {
+  margin-right: 4px;
+}
+.append {
+  margin-left: 4px;
+}
+.icon-only {
+  width: 40px;
+  height: 40px;
+}
 </style>

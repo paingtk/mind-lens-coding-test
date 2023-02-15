@@ -6,5 +6,3 @@ import AppButton from './components/AppButton.vue'
   <h1>Mind Lens Coding Test</h1>
   <AppButton></AppButton>
 </template>
-
-<style scoped></style>

@@ -4,16 +4,24 @@
     :alertType="alertType"
     :style="[
       alertType === 'info'
-        ? { backgroundColor: '#f4faff', borderColor: '#2c75dd' }
+        ? { backgroundColor: '#f4faff', borderColor: primaryColor }
         : alertType === 'error'
-        ? { backgroundColor: '#FEF5F5', borderColor: '#CC3123' }
+        ? { backgroundColor: '#FEF5F5', borderColor: errorColor }
         : alertType === 'warning'
-        ? { backgroundColor: '#FDF3E1', borderColor: '#C75100' }
-        : { backgroundColor: '#F8FFF2', borderColor: '#008700' },
+        ? { backgroundColor: '#FDF3E1', borderColor: warningColor }
+        : { backgroundColor: '#F8FFF2', borderColor: successColor },
     ]"
   >
     <font-awesome-icon
-      icon="fa-solid fa-circle-info"
+      :icon="
+        alertType === 'info'
+          ? 'fa-solid fa-circle-info'
+          : alertType === 'error'
+          ? 'fa-solid fa-circle-exclamation'
+          : alertType === 'warning'
+          ? 'fa-solid fa-triangle-exclamation'
+          : 'fa-solid fa-circle-check'
+      "
       :style="[
         alertType === 'info'
           ? { color: '#2c75dd' }
@@ -37,15 +45,45 @@
         links to help the user understand what they should do.
       </p>
       <div class="btn-container">
-        <AppButton class="secondary-btn" button-type="secondary"></AppButton>
-        <AppButton></AppButton>
+        <AppButton
+          class="secondary-btn"
+          button-type="secondary"
+          :color="
+            alertType === 'info'
+              ? infoColor
+              : alertType === 'error'
+              ? errorColor
+              : alertType === 'warning'
+              ? warningColor
+              : successColor
+          "
+        ></AppButton>
+        <AppButton
+          :color="
+            alertType === 'info'
+              ? infoColor
+              : alertType === 'error'
+              ? errorColor
+              : alertType === 'warning'
+              ? warningColor
+              : successColor
+          "
+        ></AppButton>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import AppButton from './AppButton.vue'
+
+const infoColor = ref('#F7BA50')
+const primaryColor = ref('#2c75dd')
+const errorColor = ref('#CC3123')
+const warningColor = ref('#C75100')
+const successColor = ref('#008700')
+
 const props = defineProps({
   alertType: {
     type: String,
@@ -55,9 +93,6 @@ const props = defineProps({
 </script>
 
 <style scoped>
-/* .fa-circle-info {
-  color: #2c75dd;
-} */
 p {
   color: #0c0d0d;
   text-align: left;
@@ -93,5 +128,17 @@ button.close-btn {
 }
 button.close-btn:hover {
   border: none;
+}
+
+@media only screen and (max-width: 600px) {
+  div.text-container {
+    width: 234px;
+  }
+  div.btn-container {
+    flex-direction: column;
+  }
+  .secondary-btn {
+    margin-bottom: 16px;
+  }
 }
 </style>

@@ -4,5 +4,5 @@ import AppAlertBox from './components/AppAlertBox.vue'
 
 <template>
   <h1>Mind Lens Coding Test</h1>
-  <AppAlertBox alert-type="info"></AppAlertBox>
+  <AppAlertBox alert-type="success"></AppAlertBox>
 </template>

@@ -24,7 +24,7 @@
     <span v-if="iconOnly">
       <font-awesome-icon icon="fa-solid fa-arrow-right" size="lg" />
     </span>
-    <span v-else>Action</span>
+    <span class="btn-text" v-else>Action</span>
 
     <!-- append icon -->
     <font-awesome-icon
@@ -88,5 +88,8 @@ button:hover {
 .icon-only {
   width: 40px;
   height: 40px;
+}
+button.primary span.btn-text {
+  color: #eee;
 }
 </style>

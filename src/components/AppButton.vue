@@ -60,7 +60,6 @@ button {
   width: 130px;
   height: 40px;
   cursor: pointer;
-  transition: border-color 0.25s;
 }
 button.primary {
   background-color: #f7ba50;
@@ -70,12 +69,18 @@ button.secondary {
   color: #c75100;
   background-color: none;
 }
-button:hover {
+button.primary:hover {
   filter: drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.14))
     drop-shadow(0px 1px 18px rgba(0, 0, 0, 0.12));
-}
-button.primary:hover {
   background-color: #f5ab2b;
+  border: none;
+}
+button.secondary:hover {
+  filter: drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.14))
+    drop-shadow(0px 1px 18px rgba(0, 0, 0, 0.12));
+  border-color: #c75100;
+  color: #c75100;
+  background-color: none;
 }
 .prepend {
   margin-right: 4px;

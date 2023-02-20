@@ -12,10 +12,10 @@ const onClick = () => {
 
 <template>
   <h3>Mind Lens Coding Test</h3>
-  <AppButton v-if="!showAlertBox" @click="onClick" />
+  <AppButton v-if="!showAlertBox" @click="onClick" text="Get Info" />
   <AppAlertBox
     v-if="showAlertBox"
-    alert-type="warning"
+    alert-type="info"
     @closeAlert="onClick"
   ></AppAlertBox>
 </template>

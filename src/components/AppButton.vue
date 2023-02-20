@@ -24,7 +24,7 @@
     <span v-if="iconOnly">
       <font-awesome-icon icon="fa-solid fa-arrow-right" size="lg" />
     </span>
-    <span class="btn-text" v-else>Action</span>
+    <span class="btn-text" v-else>{{ text }}</span>
 
     <!-- append icon -->
     <font-awesome-icon
@@ -38,6 +38,10 @@
 
 <script setup>
 defineProps({
+  text: {
+    type: String,
+    default: 'Action',
+  },
   color: {
     type: String,
     default: '#f7ba50',

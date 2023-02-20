@@ -34,17 +34,13 @@
       size="xl"
     />
     <div class="text-container">
-      <span class="title-container">
-        <p class="title">A short descriptive header</p>
-        <button class="close-btn">
-          <font-awesome-icon icon="fa-solid fa-xmark" size="lg" />
-        </button>
-      </span>
-      <p class="description">
+      <p v-if="title" class="title">A short descriptive header</p>
+      <p v-if="description" class="description">
         This is a paragraph of information with additional supporting detail or
         links to help the user understand what they should do.
       </p>
-      <div class="btn-container">
+
+      <div v-if="title && description" class="btn-container">
         <AppButton
           class="secondary-btn"
           button-type="secondary"
@@ -71,6 +67,9 @@
         ></AppButton>
       </div>
     </div>
+    <button class="close-btn" @click="closeBtn">
+      <font-awesome-icon icon="fa-solid fa-xmark" size="lg" />
+    </button>
   </div>
 </template>
 
@@ -84,12 +83,26 @@ const errorColor = ref('#CC3123')
 const warningColor = ref('#C75100')
 const successColor = ref('#008700')
 
+const emit = defineEmits(['closeAlert'])
+
 const props = defineProps({
   alertType: {
     type: String,
     default: 'info',
   },
+  title: {
+    type: Boolean,
+    default: true,
+  },
+  description: {
+    type: Boolean,
+    default: true,
+  },
 })
+
+const closeBtn = () => {
+  emit('closeAlert', false)
+}
 </script>
 
 <style scoped>
@@ -110,10 +123,6 @@ div.text-container {
   margin-left: 14px;
   width: 720px;
 }
-span.title-container {
-  display: flex;
-  justify-content: space-between;
-}
 div.btn-container {
   display: flex;
 }
@@ -123,8 +132,8 @@ div.btn-container {
 button.close-btn {
   all: unset;
   background-color: transparent;
+  height: 0;
   cursor: pointer;
-  margin-bottom: 14px;
 }
 button.close-btn:hover {
   border: none;
